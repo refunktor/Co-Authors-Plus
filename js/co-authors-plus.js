@@ -4,19 +4,20 @@ jQuery( document ).ready(function () {
 	 * Click handler for the delete button
 	 * @param event
 	 */
-	var coauthors_delete_onclick = function( e ) {
+	const coauthors_delete_onclick = function( e ) {
 		if ( confirm( coAuthorsPlusStrings.confirm_delete ) ) {
 			return coauthors_delete( this );
 		}
 		return false;
 	};
 
-	var $coauthors_loading = jQuery("<span id='ajax-loading'></span>");
+	let $coauthors_loading = jQuery("<span id='ajax-loading'></span>");
 
 	function coauthors_delete( elem ) {
 
-		var $coauthor_row = jQuery( elem ).closest( '.coauthor-row' );
-		$coauthor_row.remove();
+		jQuery( elem )
+			.closest( '.coauthor-row' )
+			.remove();
 
 		// Hide the delete button when there's only one Co-Author
 		if ( jQuery( '#coauthors-list .coauthor-row .coauthor-tag' ).length <= 1 )
@@ -25,15 +26,14 @@ jQuery( document ).ready(function () {
 		return true;
 	}
 
-	var coauthors_edit_onclick = function( event ) {
-		var $tag = jQuery( this );
+	const coauthors_edit_onclick = function( event ) {
+		const $tag = jQuery( this );
 
-		var $co = $tag.prev();
+		const $co = $tag.prev();
 
 		$tag.hide();
 		$co.show()
-			.focus()
-			;
+			.focus();
 
 		$co.previousAuthor = $tag.text();
 	}
@@ -65,24 +65,27 @@ jQuery( document ).ready(function () {
 	 * @param boolean Initial set up or not?
 	 */
 	function coauthors_add_coauthor( author, co, init, count ){
-
+		// TODO: Remove reassigning 'co'
 		// Check if editing
 		if ( co && co.siblings( '.coauthor-tag' ).length ) {
 			coauthors_save_coauthor( author, co );
 		} else {
 			// Not editing, so we create a new co-author entry
+			let coName = '';
 			if ( count == 0 ) {
-				var coName = ( count == 0 ) ? 'coauthors-main' : '';
+				coName = ( count == 0 ) ? 'coauthors-main' : '';
 				// Add new co-author to <select>
 				//coauthors_select_author( co-author );
 			}
-			var options = { addDelete: true, addEdit: false };
+			const options = { addDelete: true, addEdit: false };
 
 			// Create autosuggest box and text tag
-			if ( ! co ) var co = coauthors_create_autosuggest( author.name, coName )
-			var tag = coauthors_create_author_tag( author );
-			var input = coauthors_create_author_hidden_input( author );
-			var $gravatar = coauthors_create_author_gravatar( author );
+			if ( ! co ) {
+				co = coauthors_create_autosuggest( author.name, coName );
+			}
+			const tag = coauthors_create_author_tag( author );
+			const input = coauthors_create_author_hidden_input( author );
+			const $gravatar = coauthors_create_author_gravatar( author );
 
 			tag.append( $gravatar );
 
@@ -90,7 +93,7 @@ jQuery( document ).ready(function () {
 
 			if ( ! init ) {
 				// Create new author-suggest and append it to a new row
-				var newCO = coauthors_create_autosuggest( '', false );
+				const newCO = coauthors_create_autosuggest( '', false );
 				coauthors_add_to_table( newCO );
 				move_loading( newCO );
 			}
@@ -117,7 +120,7 @@ jQuery( document ).ready(function () {
 	 */
 	function coauthors_add_to_table( co, tag, input, options ) {
 		if ( co ) {
-			var $div = jQuery( '<div/>' )
+			const $div = jQuery( '<div/>' )
 						.addClass( 'suggest' )
 						.addClass( 'coauthor-row' )
 						.append( co )
@@ -138,12 +141,11 @@ jQuery( document ).ready(function () {
 	 */
 	function coauthors_insert_author_edit_cells( $div, options ){
 
-		var $options = jQuery( '<div/>' )
-			.addClass( 'coauthors-author-options' )
-			;
+		const $options = jQuery( '<div/>' )
+				.addClass( 'coauthors-author-options' );
 
 		if ( options.addDelete ) {
-			var deleteBtn = jQuery( '<span/>' )
+			const deleteBtn = jQuery( '<span/>' )
 								.addClass( 'delete-coauthor' )
 								.text( coAuthorsPlusStrings.delete_label )
 								.bind( 'click', coauthors_delete_onclick )
@@ -164,7 +166,7 @@ jQuery( document ).ready(function () {
 
 		if ( ! inputName ) inputName = 'coauthorsinput[]';
 
-		var $co = jQuery( '<input/>' );
+		const $co = jQuery( '<input/>' );
 
 		$co.attr({
 			'class': 'coauthor-suggest'
@@ -193,9 +195,9 @@ jQuery( document ).ready(function () {
 	// Callback for when a user selects a co-author
 	function coauthors_autosuggest_select() {
 		$this = jQuery( this );
-		var vals = this.value.split( '|' );
+		const vals = this.value.split( '|' );
 
-		var author = {}
+		let author = {}
 		author.id = jQuery.trim( vals[0] );
 		author.login = jQuery.trim( vals[1] );
 		author.name = jQuery.trim( vals[2] );
@@ -228,8 +230,8 @@ jQuery( document ).ready(function () {
 	 */
 	function coauthors_stop_editing( event ) {
 
-		var co = jQuery( this );
-		var tag = jQuery( co.next() );
+		const co = jQuery( this );
+		const tag = jQuery( co.next() );
 
 		co.attr( 'value',tag.text() );
 
@@ -245,7 +247,7 @@ jQuery( document ).ready(function () {
 	 */
 	function coauthors_create_author_tag( author ) {
 
-		var $tag = jQuery( '<span></span>' )
+		const $tag = jQuery( '<span></span>' )
 							.text( decodeURIComponent( author.name ) )
 							.attr( 'title', coAuthorsPlusStrings.input_box_title )
 							.addClass( 'coauthor-tag' )
@@ -256,7 +258,7 @@ jQuery( document ).ready(function () {
 
 	function coauthors_create_author_gravatar( author ) {
 
-		var $gravatar = jQuery( '<img/>' )
+		const $gravatar = jQuery( '<img/>' )
 							.attr( 'alt', author.name )
 							.attr( 'src', author.avatar )
 							.addClass( 'coauthor-gravatar' )
@@ -269,7 +271,7 @@ jQuery( document ).ready(function () {
 	 * @param string Name of the co-author
 	 */
 	function coauthors_create_author_hidden_input ( author ) {
-		var input = jQuery( '<input />' )
+		const input = jQuery( '<input />' )
 						.attr({
 							'type': 'hidden',
 							'id': 'coauthors_hidden_input',
@@ -281,7 +283,7 @@ jQuery( document ).ready(function () {
 		return input;
 	}
 
-	var $coauthors_div = null;
+	let $coauthors_div = null;
 
 	/**
 	 * Initialize the Coauthors UI.
@@ -300,16 +302,16 @@ jQuery( document ).ready(function () {
 
 		if ( $coauthors_div.length ) {
 			// Create the co-authors table
-			var table = jQuery( '<div/>' )
+			const table = jQuery( '<div/>' )
 				.attr( 'id', 'coauthors-list' )
 				;
 			$coauthors_div.append( table );
 		}
 
 		// Select co-authors already added to the post
-		var addedAlready = [];
+		const addedAlready = [];
 		//jQuery('#the-list tr').each(function(){
-		var count = 0;
+		let count = 0;
 		jQuery.each( post_coauthors, function() {
 			coauthors_add_coauthor( this, undefined, true, count );
 			count++;
@@ -321,7 +323,7 @@ jQuery( document ).ready(function () {
 
 
 		// Create new author-suggest and append it to a new row
-		var newCO = coauthors_create_autosuggest( '', false );
+		const newCO = coauthors_create_autosuggest( '', false );
 		coauthors_add_to_table( newCO );
 
 		$coauthors_loading = jQuery( '#publishing-action .spinner' ).clone().attr( 'id', 'coauthors-loading' );
@@ -356,7 +358,7 @@ jQuery( document ).ready(function () {
 		if ( settings.url.indexOf( coAuthorsPlus_ajax_suggest_link ) != -1 ) {
 			// Including existing authors on the AJAX suggest link
 			// allows us to filter them out of the search request
-			var existing_authors = jQuery( 'input[name="coauthors[]"]' ).map(function(){return jQuery( this ).val();}).get();
+			const existing_authors = jQuery( 'input[name="coauthors[]"]' ).map(function(){return jQuery( this ).val();}).get();
 			settings.url = settings.url.split( '&existing_authors' )[0];
 			settings.url += '&existing_authors=' + existing_authors.join( ',' );
 			show_loading();
@@ -369,15 +371,15 @@ jQuery( document ).ready(function () {
 	});
 
 	if ( 'post-php' == adminpage || 'post-new-php' == adminpage ) {
-		var $post_coauthor_logins = jQuery( 'input[name="coauthors[]"]' );
-		var $post_coauthor_names = jQuery( 'input[name="coauthorsinput[]"]' );
-		var $post_coauthor_emails = jQuery( 'input[name="coauthorsemails[]"]' );
-		var $post_coauthor_nicenames = jQuery( 'input[name="coauthorsnicenames[]"]' );
-		var $post_coauthoravatars = jQuery( 'input[name="coauthorsavatars[]"]' );
+		const $post_coauthor_logins = jQuery( 'input[name="coauthors[]"]' );
+		const $post_coauthor_names = jQuery( 'input[name="coauthorsinput[]"]' );
+		const $post_coauthor_emails = jQuery( 'input[name="coauthorsemails[]"]' );
+		const $post_coauthor_nicenames = jQuery( 'input[name="coauthorsnicenames[]"]' );
+		const $post_coauthoravatars = jQuery( 'input[name="coauthorsavatars[]"]' );
 
-		var post_coauthors = [];
+		const post_coauthors = [];
 
-		for ( var i = 0; i < $post_coauthor_logins.length; i++ ) {
+		for ( let i = 0; i < $post_coauthor_logins.length; i++ ) {
 			post_coauthors.push({
 				login: $post_coauthor_logins[i].value,
 				name: $post_coauthor_names[i].value,
@@ -393,29 +395,29 @@ jQuery( document ).ready(function () {
 	}
 	else if ( 'edit-php' == adminpage ) {
 
-		var wpInlineEdit = inlineEditPost.edit;
+		const wpInlineEdit = inlineEditPost.edit;
 
 		inlineEditPost.edit = function( id ) {
 
 			wpInlineEdit.apply( this, arguments )
 
 			// get the post ID
-			var postId = 0
+			let postId = 0
 			if ( typeof( id ) == 'object' )
 				postId = parseInt( this.getId( id ) )
 
 			if ( postId > 0 ) {
 
-				var $postRow = jQuery( '#post-' + postId )
+				const $postRow = jQuery( '#post-' + postId )
 
 				// Move the element to the appropriate position in the view
 				// JS hack for core bug: https://core.trac.wordpress.org/ticket/26982
 				jQuery( '.quick-edit-row .inline-edit-col-left .inline-edit-col' ).find( '.inline-edit-coauthors' ).remove() // remove any previously added elements
-				var el = jQuery( '.inline-edit-group.inline-edit-coauthors', '#edit-' + postId );
-				el.detach().appendTo( '.quick-edit-row .inline-edit-col-left .inline-edit-col' ).show();
+				const editEl = jQuery( '.inline-edit-group.inline-edit-coauthors', '#edit-' + postId );
+				editEl.detach().appendTo( '.quick-edit-row .inline-edit-col-left .inline-edit-col' ).show();
 
 				// initialize co-authors
-				var post_coauthors = jQuery.map( jQuery( '.column-coauthors a', $postRow ), function( el ) {
+				const post_coauthors = jQuery.map( jQuery( '.column-coauthors a', $postRow ), function( el ) {
 					return {
 						login: jQuery( el ).data( 'user_login' ),
 						name: jQuery( el ).data( 'display_name' ),
@@ -434,6 +436,6 @@ jQuery( document ).ready(function () {
 });
 
 if ( typeof( console ) === 'undefined' ) {
-	var console = {}
+	let console = {}
 	console.log = console.error = function() {};
 }
