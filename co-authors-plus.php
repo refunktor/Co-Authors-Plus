@@ -48,23 +48,23 @@ class CoAuthors_Plus {
 
 	// Name for the taxonomy we're using to store relationships
 	// and the post type we're using to store guest authors
-	var $coauthor_taxonomy = 'author';
+	public $coauthor_taxonomy = 'author';
 
-	var $coreauthors_meta_box_name = 'authordiv';
-	var $coauthors_meta_box_name = 'coauthorsdiv';
-	var $force_guest_authors = false;
+	public $coreauthors_meta_box_name = 'authordiv';
+	public $coauthors_meta_box_name = 'coauthorsdiv';
+	public $force_guest_authors = false;
 
-	var $gravatar_size = 25;
+	public $gravatar_size = 25;
 
-	var $_pages_whitelist = array( 'post.php', 'post-new.php', 'edit.php' );
+	public $_pages_whitelist = array( 'post.php', 'post-new.php', 'edit.php' );
 
-	var $supported_post_types = array();
+	public $supported_post_types = array();
 
-	var $ajax_search_fields = array( 'display_name', 'first_name', 'last_name', 'user_login', 'ID', 'user_email' );
+	public $ajax_search_fields = array( 'display_name', 'first_name', 'last_name', 'user_login', 'ID', 'user_email' );
 
-	var $having_terms = '';
+	public $having_terms = '';
 
-	var $to_be_filtered_caps = array();
+	public $to_be_filtered_caps = array();
 
 	/**
 	 * __construct()

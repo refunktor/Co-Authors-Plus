@@ -9,7 +9,7 @@ require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
  */
 class CoAuthors_WP_List_Table extends WP_List_Table {
 
-	var $is_search = false;
+	public $is_search = false;
 
 	function __construct() {
 		if ( ! empty( $_REQUEST['s'] ) ) {

@@ -9,9 +9,9 @@
 class CoAuthors_Guest_Authors
 {
 
-	var $post_type = 'guest-author';
-	var $parent_page = 'users.php';
-	var $list_guest_authors_cap = 'list_users';
+	public $post_type = 'guest-author';
+	public $parent_page = 'users.php';
+	public $list_guest_authors_cap = 'list_users';
 
 	public static $cache_group = 'coauthors-plus-guest-authors';
 

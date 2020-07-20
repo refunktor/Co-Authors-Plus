@@ -80,11 +80,11 @@ function is_coauthor_for_post( $user, $post_id = 0 ) {
 }
 
 class CoAuthorsIterator {
-	var $position = -1;
-	var $original_authordata;
-	var $current_author;
-	var $authordata_array;
-	var $count;
+	public $position = -1;
+	public $original_authordata;
+	public $current_author;
+	public $authordata_array;
+	public $count;
 
 	function __construct( $postID = 0 ) {
 		global $post, $authordata, $wpdb;
