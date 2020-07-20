@@ -37,6 +37,7 @@ define( 'COAUTHORS_PLUS_VERSION', '4.0.0' );
 require_once( dirname( __FILE__ ) . '/template-tags.php' );
 require_once( dirname( __FILE__ ) . '/deprecated.php' );
 
+require_once( dirname( __FILE__ ) . '/php/class-coauthors-feed-filters.php' );
 require_once( dirname( __FILE__ ) . '/php/class-coauthors-template-filters.php' );
 require_once( dirname( __FILE__ ) . '/php/integrations/amp.php' );
 
@@ -65,6 +66,8 @@ class CoAuthors_Plus {
 	public $having_terms = '';
 
 	public $to_be_filtered_caps = array();
+
+	public $filter_handler_feed = null;
 
 	/**
 	 * __construct()
@@ -143,7 +146,6 @@ class CoAuthors_Plus {
 	 * and the custom post type to store our author data
 	 */
 	public function action_init() {
-
 		// Allow Co-Authors Plus to be easily translated
 		load_plugin_textdomain( 'co-authors-plus', null, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -156,7 +158,12 @@ class CoAuthors_Plus {
 			}
 		}
 
-		// Maybe automatically apply our template tags
+		// Maybe automatically apply our feed tags (default: true)
+		if ( apply_filters( 'coauthors_auto_apply_feed_tags', true ) ) {
+			$this->filter_handler_feed = new CoAuthors_Feed_Filters;
+		}
+
+		// Maybe automatically apply our template tags (default: false)
 		if ( apply_filters( 'coauthors_auto_apply_template_tags', false ) ) {
 			global $coauthors_plus_template_filters;
 			$coauthors_plus_template_filters = new CoAuthors_Template_Filters;
