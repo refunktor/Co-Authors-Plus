@@ -1,18 +1,11 @@
 <?php
-/*
-Plugin Name: Co-Authors+
-Plugin URI: http://wordpress.org/extend/plugins/co-authors-plus/
-Description: Allows multiple authors to be assigned to a post. This plugin is an extended version of the Co-Authors plugin developed by Weston Ruter.
-Version: 4.0.0
-Author: refunktor, Mohammad Jangda, Daniel Bachhuber, Automattic
------------------
-Glossary:
-
-User - a WordPress user account
-Guest author - a CAP-created co-author
-Co-author - in the context of a single post, a guest author or user assigned to the post alongside others
-Author - user with the role of author
-*/
+/**
+ * Plugin Name: Co-Authors+
+ * Plugin URI: http://wordpress.org/extend/plugins/co-authors-plus/
+ * Description: Allows multiple authors to be assigned to a post. This plugin is an extended version of the Co-Authors plugin developed by Weston Ruter.
+ * Version: 4.0.0
+ * Author: refunktor, Mohammad Jangda, Daniel Bachhuber, Automattic
+ */
 
 define( 'COAUTHORS_PLUS_VERSION', '4.0.0' );
 
