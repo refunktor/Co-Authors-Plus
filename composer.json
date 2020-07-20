@@ -1,24 +1,18 @@
 {
-	"name"       : "automattic/co-authors-plus",
+	"name"       : "refunktor/co-authors-plus",
 	"description": "Multiple bylines and Guest Authors for WordPress",
 	"homepage"   : "http://wordpress.org/plugins/co-authors-plus/",
 	"type"       : "wordpress-plugin",
 	"license"    : "GPL-2.0+",
 	"authors"    : [
 		{
-			"name": "Daniel Bachhuber",
-			"email": "d@danielbachhuber.com",
-			"homepage": "http://danielbachhuber.com",
-			"role": "Developer"
-		},
-		{
-			"name"    : "Automattic",
-			"homepage": "http://automattic.com/"
+			"name"    : "refunktor",
+			"homepage": "https://github.com/refunktor"
 		}
 	],
 	"support"    : {
-			"issues": "https://github.com/Automattic/Co-Authors-Plus/issues",
-			"source": "https://github.com/Automattic/Co-Authors-Plus",
+			"issues": "https://github.com/refunktor/Co-Authors-Plus/issues",
+			"source": "https://github.com/refunktor/Co-Authors-Plus",
 			"forum": "http://wordpress.org/support/plugin/co-authors-plus"
 	},
 	"require": {
