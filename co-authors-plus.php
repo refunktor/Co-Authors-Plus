@@ -34,15 +34,17 @@ Author - user with the role of author
 
 define( 'COAUTHORS_PLUS_VERSION', '4.0.0' );
 
-require_once( dirname( __FILE__ ) . '/template-tags.php' );
-require_once( dirname( __FILE__ ) . '/deprecated.php' );
+define( 'COAUTHORS_PLUS_PATH', dirname( __FILE__ ) );
 
-require_once( dirname( __FILE__ ) . '/php/class-coauthors-feed-filters.php' );
-require_once( dirname( __FILE__ ) . '/php/class-coauthors-template-filters.php' );
-require_once( dirname( __FILE__ ) . '/php/integrations/amp.php' );
+require_once( COAUTHORS_PLUS_PATH . '/template-tags.php' );
+require_once( COAUTHORS_PLUS_PATH . '/deprecated.php' );
+
+require_once( COAUTHORS_PLUS_PATH . '/php/class-coauthors-feed-filters.php' );
+require_once( COAUTHORS_PLUS_PATH . '/php/class-coauthors-template-filters.php' );
+require_once( COAUTHORS_PLUS_PATH . '/php/integrations/amp.php' );
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once( dirname( __FILE__ ) . '/php/class-wp-cli.php' );
+	require_once( COAUTHORS_PLUS_PATH . '/php/class-wp-cli.php' );
 }
 
 class CoAuthors_Plus {
@@ -151,7 +153,7 @@ class CoAuthors_Plus {
 
 		// Load the Guest Authors functionality if needed
 		if ( $this->is_guest_authors_enabled() ) {
-			require_once( dirname( __FILE__ ) . '/php/class-coauthors-guest-authors.php' );
+			require_once( COAUTHORS_PLUS_PATH . '/php/class-coauthors-guest-authors.php' );
 			$this->guest_authors = new CoAuthors_Guest_Authors;
 			if ( apply_filters( 'coauthors_guest_authors_force', false ) ) {
 				$this->force_guest_authors = true;
